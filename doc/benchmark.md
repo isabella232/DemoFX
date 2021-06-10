@@ -18,31 +18,40 @@ Test
 
 ![Mac OS X HotSpot](mac-hotspot.png)
 
+Init time: 1378 ms
+
 ### Native Image
 
 ![Mac OS X Native Image](mac-native.png)
 
+Init time: 469 ms
 
-## Embedded
+## Embedded (Pi 4)
 
 ### HotSpot 
 
-#### CLI
+#### No Window Manager, full screen
 
 ![Pi CLI HotSpot](piCLI-hotspot.png)
 
-#### X/Ubuntu
+Init time: 4498 ms
+
+#### Window Manager
 
 ![Pi X HotSpot](piX-hotspot.png)
 
+Init time: 5157 ms
 
 ### Native Image
 
-#### CLI
+#### No Window Manager, full screen
 
 ![Pi CLI Native Image](piCLI-native.png)
 
+Init time: 971 ms
 
-#### X/Ubuntu
+#### Window Manager
 
 ![Pi X Native Image](piX-native.png)
+
+Init time: 1932 ms
