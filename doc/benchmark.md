@@ -8,6 +8,10 @@ Same rumtime arguments for all cases:
 -e=colourbackground,triangles -c=1000 -t=30 -Xmx50m
 ```
 
+Test
+
+![Test](test.gif)
+
 ## Desktop
 
 ### HotSpot
