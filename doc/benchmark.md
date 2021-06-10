@@ -5,7 +5,7 @@ Performance tests for JavaFX on HotSpot/Native Image, Desktop (Mac OS), Embedded
 Same rumtime arguments for all cases: 
 
 ```
--e=colourbackground,triangles -c=1000 -t=30
+-e=colourbackground,triangles -c=1000 -t=30 -Xmx50m
 ```
 
 ## Desktop
