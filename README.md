@@ -32,7 +32,7 @@ mvn clean package
 ```
 ./run.sh [options]
 
--e <effects>               comma separated list of effects (See SimpleEffectFactory)
+-e <effects>               - separated list of effects (See SimpleEffectFactory)
 -t <seconds>               run for t seconds
 -c <count>                 number of items on screen
 -f <true>                  fullscreen mode (no stats pane)
@@ -61,31 +61,31 @@ Examples:
 ./run.sh
 
 # Triangle effect, 500 shapes run for 10 seconds
-./run.sh -e colourbackground,triangles -c 500 -t 10
+./run.sh -e=colourbackground-triangles -c=500 -t=10
 
 # Square effect, set 640x480 canvas size
-./run.sh -e colourbackground,squares -w 640 -h 480
+./run.sh -e=colourbackground-squares -w=640 -h=480
 
 # Star effect, plot mode line
-./run.sh -e colourbackground,stars -m line
+./run.sh -e=colourbackground-stars -m=line
 
 # Bounce effect with rainbow background
-./run.sh -e rainbow,bounce
+./run.sh -e=rainbow-bounce
 
 # Burst effect with rainbow background
-./run.sh -e rainbow,burst
+./run.sh -e=rainbow-burst
 
 # Layered effects: grid,ballwave
-./run.sh -e grid,ballwave
+./run.sh -e=grid-ballwave
 
 # DemoFX Part III scripted demo:
-./run.sh -s true -f true -w 1280 -h 720
+./run.sh -s=true -f=true -w=1280 -h=720
 
 # Christmas DemoFX scripted demo:
-./run.sh -s xmas -f true -w 1280 -h 720
+./run.sh -s=xmas -f=true -w=1280 -h=720
 
 #More Moiré scripted demo
-./run.sh -s moire -f true -w 1280 -h 720
+./run.sh -s=moire -f=true -w=1280 -h=720
 ```
 In order to run in another java version, like java 9. JAVA_HOME should be set.
 In MAC:
@@ -98,3 +98,59 @@ If the frame rate is not vsynced on Ubuntu then run:
 ```
 export _JAVA_OPTIONS="-Dquantum.multithreaded=false"
 ```
+
+# Gluon
+
+After running the app, an snapshot is created with the charts.
+
+## Desktop
+
+### HotSpot
+
+```
+mvn javafx:run
+```
+
+### Native Image
+
+```
+mvn client:build client:run
+```
+
+## Embedded
+
+### HotSpot 
+
+Local or SSH
+
+#### CLI
+
+```
+export ENABLE_GLUON_COMMERCIAL_EXTENSIONS=true
+mvn -Ppi,sdk javafx:run
+```
+
+#### X/Ubuntu
+
+Copy runXHotspot.sh and run
+```
+./runXHotspot.sh
+```
+
+### Native Image
+
+Build on Linux
+Set remote Hostname
+
+#### CLI
+
+```
+mvn -Ppi client:build client:install client:run
+```
+
+#### X/Ubuntu
+
+Copy runXNative.sh and run
+```
+./runXNative.sh
+

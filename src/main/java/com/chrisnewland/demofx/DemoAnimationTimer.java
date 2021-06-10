@@ -43,6 +43,7 @@ public class DemoAnimationTimer extends AnimationTimer
 
 	private IEffect[] effectArray;
 	private final int effectCount;
+	private boolean completed = false;
 
 	public DemoAnimationTimer(DemoFX parent, DemoConfig config, Label statsLabel, List<IEffect> effects)
 	{
@@ -61,7 +62,7 @@ public class DemoAnimationTimer extends AnimationTimer
 	public void start()
 	{
 		super.start();
-		
+		completed = false;
 		startTime = System.currentTimeMillis();
 		scriptStartTimeMillis = startTime;
 
@@ -125,7 +126,10 @@ public class DemoAnimationTimer extends AnimationTimer
 	@Override
 	public void stop()
 	{
-		parent.timerCompleted(measurements);
+		if (!completed) {
+			parent.timerCompleted(measurements);
+			completed = true;
+		}
 		super.stop();
 	}
 

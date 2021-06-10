@@ -44,8 +44,8 @@ public class DemoFXApplication extends Application
 		// Double-click to interrupt the demo and show the result panel:
 		scene.setOnMouseClicked((MouseEvent me) -> {
 				if (me.getClickCount() == 2) {
-				demoFX.stopDemo();
-			}
+					demoFX.stopDemo();
+				}
         	});
 
 		demoFX.runDemo();

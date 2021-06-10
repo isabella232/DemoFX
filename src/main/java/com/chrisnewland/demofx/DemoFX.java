@@ -13,6 +13,7 @@ import com.chrisnewland.demofx.effect.effectfactory.demoscript.Moire;
 import com.chrisnewland.demofx.effect.spectral.ISpectralEffect;
 import com.chrisnewland.demofx.measurement.MeasurementChartBuilder;
 import com.chrisnewland.demofx.measurement.Measurements;
+import com.chrisnewland.demofx.util.PngEncoderFX;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,19 +21,26 @@ import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioSpectrumListener;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class DemoFX implements AudioSpectrumListener, ISpectrumDataProvider
@@ -225,7 +233,9 @@ public class DemoFX implements AudioSpectrumListener, ISpectrumDataProvider
 	public void timerCompleted(Measurements measurements)
 	{
 		LineChart<Number, Number> chartHeap = MeasurementChartBuilder.buildChartHeap(measurements);
+		chartHeap.setAnimated(false);
 		LineChart<Number, Number> chartFPS = MeasurementChartBuilder.buildChartFPS(measurements);
+		chartFPS.setAnimated(false);
 
 		pane.setPadding(new Insets(4, 4, 4, 4));
 
@@ -275,7 +285,24 @@ public class DemoFX implements AudioSpectrumListener, ISpectrumDataProvider
 
 		pane.setTop(vboxLabels);
 		pane.setCenter(vboxCharts);
+
+		WritableImage image = pane.snapshot(new SnapshotParameters(), null);
+		saveImage(image);
 	}
+
+	private void saveImage(Image image) {
+		//Encode image to png
+		PngEncoderFX encoder = new PngEncoderFX(image, true);
+		byte[] bytes = encoder.pngEncode();
+
+		File file = new File("Image-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("uuuuMMdd-HHmmss")) + ".png");
+		try (FileOutputStream fos = new FileOutputStream(file)) {
+			fos.write(bytes);
+		} catch (IOException ex) {
+			System.out.println("Error: " + ex);
+		}
+	}
+
 
 	private boolean initialiseSpectralEffects(MediaPlayer mediaPlayer)
 	{

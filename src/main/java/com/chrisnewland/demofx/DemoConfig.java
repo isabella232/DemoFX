@@ -24,7 +24,7 @@ public class DemoConfig
 	private String audioFileName = null; 
 	private int count = -1;
 	private double width = 800;
-	private double height = 600;
+	private double height = 450;
 	
 	private int runForSeconds = -1;
 
@@ -125,20 +125,19 @@ public class DemoConfig
 
 		int argc = args.length;
 
-		for (int i = 0; i < argc; i += 2)
+		for (int i = 0; i < argc; i ++)
 		{
 			String arg = args[i];
 
-			boolean lastArg = (i == argc - 1);
-
-			if (arg.startsWith("-") && arg.length() == 2 && !lastArg)
+			if (arg.startsWith("-"))
 			{
-				String value = args[i + 1];
-
+				String value = arg.substring(3);
 				try
 				{
-					switch (arg.substring(1))
+					switch (arg.substring(1,2))
 					{
+					case "X": break;
+					case "D": break;
 					// =======================================
 					case "e":
 						config.effect = value;

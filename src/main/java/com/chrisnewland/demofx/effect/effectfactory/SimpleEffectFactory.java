@@ -64,11 +64,11 @@ public class SimpleEffectFactory implements IEffectFactory
 
 		String effectParam = config.getEffect();
 
-		String[] parts = effectParam.split(",");
+		String[] parts = effectParam.split("-");
 
 		for (String part : parts)
 		{
-			result.add(getEffect(part, config));
+			result.add(getEffect(part.trim(), config));
 		}
 
 		return result;
@@ -427,7 +427,7 @@ public class SimpleEffectFactory implements IEffectFactory
 			return new WordSearch(config);
 
 		default:
-			throw new UnsupportedOperationException("No such effect: " + config.getEffect());
+			throw new UnsupportedOperationException("No such effect: " + name + "!");
 		}
 	}
 }
